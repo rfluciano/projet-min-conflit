@@ -22,3 +22,15 @@ Démonstration interactive de l'heuristique **Min‑Conflit** pour la résolutio
 ```bash
 pip install flask 
 python app.py
+
+
+---
+
+## Comment lancer maintenant
+
+1. Placez tous les fichiers dans la structure indiquée.
+2. Assurez-vous que `solvers/__init__.py` existe (même vide).
+3. Installez Flask : `pip install flask`.
+4. Lancez `python app.py`.
+5. Ouvrez `http://127.0.0.1:5000` → la **landing page** s’affiche.
+6. Cliquez sur **Lancer l’application** → vous arrivez sur `/app` avec l’interface interactive complète.
