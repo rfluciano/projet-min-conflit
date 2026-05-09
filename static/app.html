@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Min‑Conflit – ADOMC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+    <header>
+        <h1>♟️ Heuristique Min‑Conflit</h1>
+        <div class="controls">
+            <button id="toggleModeBtn">🧩 Mode Sudoku</button>
+            <button id="solveBtn">▶ Résoudre</button>
+            <button id="benchBtn">📊 Benchmark (≤15s)</button>
+        </div>
+        <div id="connectionStatus" class="status offline">🔴 Backend</div>
+    </header>
+
+    <div id="queensControls" class="sub-controls">
+        <label for="size">N =</label>
+        <input type="number" id="size" value="10" min="4" max="20">
+    </div>
+
+    <div id="sudokuControls" class="sub-controls" style="display:none;">
+        <label for="difficulty">Difficulté :</label>
+        <select id="difficulty">
+            <option value="easy">Facile</option>
+            <option value="medium">Moyen</option>
+            <option value="hard">Difficile</option>
+            <option value="expert">Expert</option>
+            <option value="custom">Personnalisé</option>
+        </select>
+
+        <label for="sudokuMethod" style="margin-left:15px;">Méthode :</label>
+        <select id="sudokuMethod">
+            <option value="backtrack">Solveur Pro (Backtracking)</option>
+            <option value="minconf">Heuristique Min‑Conflit</option>
+        </select>
+
+        <div id="customGridArea" style="display:none;">
+            <textarea id="sudokuGridInput" rows="5" cols="20">0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0</textarea>
+        </div>
+        <button id="loadSudokuBtn">Charger la grille</button>
+    </div>
+
+    <div class="main-layout">
+        <aside class="left-panel">
+            <div class="classification">
+                <h3>📚 Cours ADOMC</h3>
+                <ul class="tree">
+                    <li>Heuristiques / Métaheuristiques
+                        <ul>
+                            <li>Solution unique → <strong class="active">Min‑Conflit</strong></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="stats">
+                <h4>Stats résolution</h4>
+                <div id="statsContent">En attente...</div>
+            </div>
+        </aside>
+
+        <main class="board-area">
+            <div id="boardContainer" class="board-container"></div>
+            <div id="loadingIndicator" class="loading" style="display:none;">
+                <div class="spinner"></div> Calcul...
+            </div>
+            <div class="info-panel" id="infoPanel"></div>
+        </main>
+
+        <aside class="right-panel" id="rightPanel">
+            <h3>👑 Suivi des reines</h3>
+            <div class="queen-table-container">
+                <table id="queenTable">
+                    <thead>
+                        <tr><th>Q°</th><th>Position</th><th>Déplacement</th><th>Status</th><th>État</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </aside>
+    </div>
+
+    <div class="timeline" id="timeline" style="display:none;">
+        <input type="range" id="stepSlider" min="0" value="0" step="1">
+        <button id="playBtn">▶</button>
+        <button id="endBtn">⏩ Fin</button>
+        <span id="stepLabel">Étape 0/0</span>
+    </div>
+
+    <div id="benchOverlay" class="bench-overlay" style="display:none;">
+        <div class="bench-content">
+            <h2>📊 Résultats du benchmark</h2>
+            <table id="benchTable"></table>
+            <canvas id="benchGraph" width="400" height="150"></canvas>
+            <button id="closeBenchBtn">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

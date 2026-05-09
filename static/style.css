@@ -1,0 +1,322 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.dark-mode {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header {
+    padding: 8px 15px;
+    background: #181825;
+    border-bottom: 1px solid #313244;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 { font-size: 1.2rem; color: #cba6f7; }
+
+.controls { display: flex; align-items: center; gap: 8px; }
+
+.sub-controls {
+    padding: 10px 15px;
+    background: #181825;
+    border-bottom: 1px solid #313244;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.sub-controls label {
+    font-weight: 600;
+    color: #f5c2e7;
+}
+
+input[type="number"], select {
+    padding: 4px 8px;
+    background: #313244;
+    color: #cdd6f4;
+    border: 1px solid #585b70;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+select:hover {
+    border-color: #f5c2e7;
+}
+
+button {
+    background: #6c7086;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: #f5c2e7;
+    color: #1e1e2e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+.status.online { background: #a6e3a1; color: #1e1e2e; }
+.status.offline { background: #f38ba8; color: #1e1e2e; }
+
+.main-layout {
+    display: flex;
+    flex: 1;
+    padding: 8px;
+    gap: 8px;
+    height: calc(100vh - 110px);
+    min-height: 0;
+}
+
+.left-panel {
+    width: 16%;
+    background: #181825;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+}
+.tree { list-style: none; padding-left: 10px; }
+.active { background: #f38ba8; color: #1e1e2e; padding: 2px 6px; border-radius: 4px; }
+.stats { background: #313244; padding: 8px; border-radius: 6px; flex: 1; }
+
+.board-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.board-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Échiquier N‑Reines */
+.queens-board {
+    display: grid;
+    border: 3px solid #cba6f7;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(203,166,247,0.3);
+    margin-bottom: 0;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: background 0.2s;
+}
+.cell.light { background: #f0d9b5; }
+.cell.dark  { background: #b58863; }
+
+.queen {
+    line-height: 1;
+    transition: all 0.2s;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+.angry .queen { color: #ff5555; filter: drop-shadow(0 0 8px red); }
+.happy .queen { color: #a6e3a1; }
+.moved .queen { color: #f9e2af; }
+
+/* Grille Sudoku */
+.sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 48px);
+    grid-template-rows: repeat(9, 48px);
+    border: 3px solid #000;
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.sudoku-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    position: relative;
+    border: 1px solid #888;
+    transition: background 0.2s, color 0.2s;
+    color: #000;
+    width: 48px;
+    height: 48px;
+}
+
+.sudoku-cell.fixed {
+    color: #000;
+}
+.sudoku-cell.new {
+    color: #000080;
+}
+.sudoku-cell.conflict {
+    background: #ffaaaa !important;
+}
+
+.sudoku-cell.right-thick {
+    border-right: 2px solid #000;
+}
+.sudoku-cell.bottom-thick {
+    border-bottom: 2px solid #000;
+}
+
+.info-panel {
+    background: #313244;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    max-width: 400px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.error-message {
+    background: rgba(243, 139, 168, 0.2);
+    color: #f38ba8;
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid #f38ba8;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.timeout-message {
+    background: rgba(249, 226, 175, 0.2);
+    color: #f9e2af;
+    border: 1px solid #f9e2af;
+}
+
+.loading {
+    background: #313244;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid #6c7086;
+    border-top-color: #f5c2e7;
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.right-panel {
+    width: 24%;
+    background: #181825;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+}
+.right-panel h3 { color: #f5c2e7; margin-bottom: 8px; }
+
+.queen-table-container {
+    flex: 1;
+    overflow-y: auto;
+    border-radius: 6px;
+    background: #313244;
+}
+
+#queenTable, #trackingTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+}
+
+#queenTable th, #trackingTable th {
+    background: #585b70;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 4px 6px;
+    text-align: left;
+}
+
+#queenTable td, #trackingTable td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #45475a;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+.status-attente { background: rgba(108,112,134,0.3); color: #ffffff; }
+.status-cours   { background: rgba(249,226,175,0.3); color: #f9e2af; }
+.status-place   { background: rgba(166,227,161,0.3); color: #a6e3a1; }
+
+.timeline {
+    background: #181825;
+    padding: 10px 20px;
+    border-top: 1px solid #313244;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.timeline input[type="range"] {
+    flex: 1;
+    max-width: 400px;
+    accent-color: #cba6f7;
+}
+
+.bench-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.bench-content {
+    background: #1e1e2e;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+#closeBenchBtn { margin-top: 10px; }
