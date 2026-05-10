@@ -1,0 +1,7 @@
+setup.py
+min_conflit.egg-info/PKG-INFO
+min_conflit.egg-info/SOURCES.txt
+min_conflit.egg-info/dependency_links.txt
+min_conflit.egg-info/entry_points.txt
+min_conflit.egg-info/requires.txt
+min_conflit.egg-info/top_level.txt
